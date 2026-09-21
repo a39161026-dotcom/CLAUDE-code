@@ -98,31 +98,33 @@ document.getElementById("predictBtn").addEventListener("click", async () => {
   }
 });
 
-function renderResult({ prediction, probabilities }) {
+function renderResult({ prediction, digits }) {
   predictedDigitEl.textContent = prediction;
 
   probListEl.innerHTML = "";
-  probabilities.forEach((p, digit) => {
-    const row = document.createElement("div");
-    row.className = "prob-row" + (digit === prediction ? " top" : "");
+  digits.forEach(({ digit, confidence }) => {
+    const chip = document.createElement("div");
+    chip.className = "digit-chip";
 
-    const label = document.createElement("span");
-    label.textContent = digit;
+    const value = document.createElement("span");
+    value.className = "digit-chip-value";
+    value.textContent = digit;
 
     const track = document.createElement("div");
     track.className = "prob-bar-track";
     const fill = document.createElement("div");
     fill.className = "prob-bar-fill";
-    fill.style.width = `${Math.round(p * 100)}%`;
+    fill.style.width = `${Math.round(confidence * 100)}%`;
     track.appendChild(fill);
 
     const pct = document.createElement("span");
-    pct.textContent = `${Math.round(p * 100)}%`;
+    pct.className = "digit-chip-pct";
+    pct.textContent = `${Math.round(confidence * 100)}%`;
 
-    row.appendChild(label);
-    row.appendChild(track);
-    row.appendChild(pct);
-    probListEl.appendChild(row);
+    chip.appendChild(value);
+    chip.appendChild(track);
+    chip.appendChild(pct);
+    probListEl.appendChild(chip);
   });
 }
 
