@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>손글씨 숫자 인식</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <h1>손글씨 숫자 인식</h1>
+    <p class="desc">캔버스에 숫자(0~9)를 마우스로 그리고 예측하기 버튼을 눌러보세요.</p>
+
+    <div class="canvas-wrap">
+      <canvas id="canvas" width="280" height="280"></canvas>
+    </div>
+
+    <div class="controls">
+      <button id="clearBtn" type="button">지우기</button>
+      <button id="predictBtn" type="button">예측하기</button>
+    </div>
+
+    <section class="result">
+      <div class="predicted-digit">
+        <span id="predictedDigit">?</span>
+      </div>
+      <div class="prob-list" id="probList"></div>
+    </section>
+
+    <p class="error" id="errorMsg"></p>
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
