@@ -2,6 +2,7 @@ services:
   - type: web
     name: daily-tasks
     env: static
+    rootDir: todo-app
     buildCommand: ""
     staticPublishPath: ./
     routes:
