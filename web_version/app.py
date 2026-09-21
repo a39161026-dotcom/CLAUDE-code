@@ -12,10 +12,16 @@ import numpy as np
 from flask import Flask, jsonify, render_template, request
 from PIL import Image
 
+import train_model
+
 BASE_DIR = Path(__file__).parent
 MODEL_PATH = BASE_DIR / "model" / "digit_model.pkl"
 
 app = Flask(__name__)
+
+if not MODEL_PATH.exists():
+    # 모델 파일이 없으면 최초 실행 시 자동으로 학습해서 생성한다.
+    train_model.main()
 
 with open(MODEL_PATH, "rb") as f:
     model = pickle.load(f)

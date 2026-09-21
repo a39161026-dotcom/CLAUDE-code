@@ -2,20 +2,34 @@
 
 브라우저 캔버스에 마우스(또는 터치)로 숫자(0~9)를 그리면 Flask 서버가 학습된 모델로 예측 결과를 반환합니다.
 
-## 실행 방법
+## 바로 실행하기
+
+`web_version` 폴더에 학습된 모델(`model/digit_model.pkl`)이 이미 포함되어 있어서
+가상환경 생성 + 의존성 설치 + 서버 실행을 한 번에 해주는 스크립트만 실행하면 됩니다.
+
+**macOS / Linux**
+```bash
+cd web_version
+./run.sh
+```
+
+**Windows**
+```bat
+cd web_version
+run.bat
+```
+
+실행 후 브라우저에서 `http://localhost:5000` 접속 → 캔버스에 숫자를 그리고 "예측하기" 클릭.
+
+### 수동으로 실행하려면
 
 ```bash
 cd web_version
 pip install -r requirements.txt
-
-# 모델 학습 (최초 1회, model/digit_model.pkl 생성)
-python train_model.py
-
-# 서버 실행
-python app.py
+python app.py   # model/digit_model.pkl 이 없으면 첫 실행 시 자동으로 학습해서 생성함
 ```
 
-브라우저에서 `http://localhost:5000` 접속 후 캔버스에 숫자를 그리고 "예측하기"를 누르세요.
+모델을 새로 학습하고 싶다면 `python train_model.py` 를 직접 실행하세요.
 
 ## 구조
 
