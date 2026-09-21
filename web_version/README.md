@@ -31,6 +31,19 @@ python app.py   # model/digit_model.pkl 이 없으면 첫 실행 시 자동으�
 
 모델을 새로 학습하고 싶다면 `python train_model.py` 를 직접 실행하세요.
 
+## Render 배포
+
+1. https://render.com 가입/로그인 후 GitHub 저장소(`a39161026-dotcom/CLAUDE-code`) 연결
+2. "New +" → "Web Service" → 이 저장소 선택
+3. 아래 값 입력 (레포 루트의 `render.yaml`을 인식하면 "New +" → "Blueprint"로 자동 채워짐)
+   - **Root Directory**: `web_version`
+   - **Build Command**: `pip install -r requirements.txt && python train_model.py`
+   - **Start Command**: `gunicorn app:app`
+4. "Create Web Service" 클릭 → 몇 분 후 `https://<서비스이름>.onrender.com` 주소 발급됨
+
+**커스텀 도메인 연결하려면**: Render 대시보드 → 해당 서비스 → Settings → Custom Domains → 소유한 도메인 입력 →
+안내되는 CNAME(또는 A) 레코드를 도메인 구입처(가비아, 후이즈, Cloudflare 등) DNS 설정에 추가하면 됩니다.
+
 ## 구조
 
 - `train_model.py` — scikit-learn `digits` 데이터셋(8x8 숫자 이미지)으로 MLP 분류기를 학습해 `model/digit_model.pkl`로 저장
